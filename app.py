@@ -3,7 +3,7 @@ import sys
 from datetime import date
 
 if len(sys.argv) < 2:
-    print("Usage: python your_script.py <url>")
+    print("Usage: python app.py <url>")
     sys.exit(1)
 
 google_doc_url = sys.argv[1]

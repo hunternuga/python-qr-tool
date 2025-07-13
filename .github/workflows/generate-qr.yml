@@ -28,7 +28,7 @@ jobs:
       - name: Create QR code from input URL
         run: |
           echo "Generating QR for: ${{ github.event.inputs.url }}"
-          python your_script.py "${{ github.event.inputs.url }}"
+          python app.py "${{ github.event.inputs.url }}"
 
       - name: Upload QR code as artifact
         uses: actions/upload-artifact@v4
