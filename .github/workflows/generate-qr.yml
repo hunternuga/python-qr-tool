@@ -1,7 +1,12 @@
-name: Generate Weekly QR Code
+name: Generate QR Code from URL
 
 on:
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Google Doc URL to encode"
+        required: true
+        type: string
 
 jobs:
   generate_qr:
@@ -9,21 +14,22 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'  # Or your version
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run QR code script
+      - name: Create QR code from input URL
         run: |
-          python app.py
+          echo "Generating QR for: ${{ github.event.inputs.url }}"
+          python your_script.py "${{ github.event.inputs.url }}"
 
       - name: Upload QR code as artifact
         uses: actions/upload-artifact@v4
