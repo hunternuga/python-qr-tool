@@ -21,3 +21,4 @@ k8s & minikube:
 
 other information:
 - the application, when built and deployed locally with minikube, needs to be port forwarded to localhost:5000. this can be done very easily by running the command `kubectl port-forward service/qr-app-service 5000:5000`. this allows the app to be accessible locally for development/testing or even personal use!
+- IMPORTANT: the terminal will obviously have to stay open in the background during use so that it can listen on localhost:5000
