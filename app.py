@@ -1,27 +1,12 @@
-from flask import Flask, request, send_file, render_template_string
+from flask import Flask, request, send_file, render_template
 import qrcode
 from io import BytesIO
 from datetime import date
 import base64
+import os
 
 app = Flask(__name__)
-
-# HTML template with preview and download
-HTML_TEMPLATE = """
-<!doctype html>
-<title>QR Code Generator</title>
-<h1>Generate QR Code</h1>
-<form method="POST">
-  URL: <input type="text" name="url" required>
-  <input type="submit" value="Generate">
-</form>
-
-{% if qr_img %}
-  <h2>Preview for {{ url }}:</h2>
-  <img src="{{ qr_img }}" alt="QR Code"><br><br>
-  <a href="/download?url={{ url }}">Download QR Code</a>
-{% endif %}
-"""
+app.template_folder = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/", methods=["GET", "POST"])
 def generate_qr():
@@ -49,7 +34,7 @@ def generate_qr():
             
             qr_img_url = "data:image/png;base64," + base64.b64encode(img_io.getvalue()).decode()
 
-    return render_template_string(HTML_TEMPLATE, qr_img=qr_img_url, url=url)
+    return render_template('app.html', qr_img=qr_img_url, url=url)
 
 @app.route("/download")
 def download_qr():
