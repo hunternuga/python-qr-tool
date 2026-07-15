@@ -12,7 +12,7 @@ docker & python:
 - a simple dockerfile is used to build the image for the Python app using flask.
 
 k8s & minikube:
-- a minikube container is uses a Docker built image, loads it, and makes it availbe for use after being port forwarded to port 5000, @ `localhost`.
+- a minikube container is used a Docker built image, loads it, and makes it availbe for use after being port forwarded to port 5000, @ `localhost`.
 - a `deployment.yaml` file is used to deploy the service via `kubectl`. the pod and service are then created.
 
 `render.com` hosting (optional, for public viewing):
